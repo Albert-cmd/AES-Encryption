@@ -16,17 +16,18 @@ import java.security.NoSuchAlgorithmException;
 public class Hash_Generator_SHA256 {
     
 
-    public void messageToBytes (String missatge) throws NoSuchAlgorithmException{
+    public byte[] messageToBytes (String missatge) throws NoSuchAlgorithmException{
     
     MessageDigest digest = MessageDigest.getInstance("SHA-256");
     byte[] encodedhash = digest.digest(
     missatge.getBytes(StandardCharsets.UTF_8));
     
+    return encodedhash; 
     }
     
    
     
-    private static String bytesToHex(byte[] hash) {
+    public  String bytesToHex(byte[] hash) {
         
     StringBuffer hexString = new StringBuffer();
     
