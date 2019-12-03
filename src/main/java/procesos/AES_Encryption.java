@@ -11,6 +11,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.Base64;
 import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
@@ -22,9 +24,17 @@ public class AES_Encryption {
     
     private static SecretKeySpec secretKey;
     private static byte[] key;
+    
+    
  
-    public static void setKey(String myKey) 
+    public static void setKey(String myKey) throws NoSuchAlgorithmException 
     {
+        
+        KeyGenerator keyGen = KeyGenerator.getInstance("AES");
+        keyGen.init(128);
+        SecretKey secretKey = keyGen.generateKey();
+        
+        
         MessageDigest sha = null;
         
         try {
@@ -35,6 +45,7 @@ public class AES_Encryption {
             secretKey = new SecretKeySpec(key, "AES");
         } 
         catch (NoSuchAlgorithmException e) {
+            
             e.printStackTrace();
         } 
         catch (UnsupportedEncodingException e) {
